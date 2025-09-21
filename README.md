@@ -47,7 +47,7 @@ curl http://localhost:9100/metrics | head -n 10
 
 3. Configured and Started Prometheus
 
-Placed the provided prometheus.yml in the project directory and started Prometheus:
+Added the provided prometheus.yml to the project directory and started Prometheus:
 prometheus --config.file=prometheus.yml
 Access Prometheus via: http://localhost:9090
 
@@ -95,7 +95,7 @@ Ensured the Node Exporter version matches the macOS architecture.
 
 Dashboards included variables (job, node, instance) that needed manual correction/selection for metrics display.
 
-Prometheus must successfully scrape Node Exporter for Grafana to display data and manauak checks and restart of Grafana was needed.
+Prometheus must successfully scrape Node Exporter in order for Grafana to display data and manauak checks and restart of Grafana was needed.
 
 This personal setup provides a functional monitoring stack that allows visualization of system metrics in a Grafana dashboard on macOS.
 
