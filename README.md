@@ -33,7 +33,7 @@ This ensures the required software components are available on the system.
 
 ---
 
-#### 2. Download and Run Node Exporter
+2. Downloaded and Run Node Exporter
 
 Downloaded the appropriate Node Exporter version for the system architecture (Intel amd64 or Apple Silicon arm64) from the Node Exporter releases
 
