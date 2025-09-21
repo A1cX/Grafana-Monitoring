@@ -10,18 +10,11 @@ The monitoring setup follows a three-tier architecture:
 
 +-----------------+ +----------------+ +----------------+
 | | | | | |
-| Node Exporter +----->+ Prometheus +----->+ Grafana |
-| (metrics) | | (stores data) | | (visualizes) |
+| Node Exporter +---->+ Prometheus +---->+ Grafana |
+| (collects | | (scrapes & | | (visualizes |
+| metrics) | | stores data) | | metrics) |
 | | | | | |
 +-----------------+ +----------------+ +----------------+
-
-
-┌─────────────────┐ ┌────────────────┐ ┌────────────────┐
-│ │ │ │ │ │
-│ Node Exporter │ │ Prometheus │ │ Grafana │
-│ (metrics) │ │ (scrapes & │ │ (visualizes) │
-│ │ │ stores data) │ │ │
-└─────────────────┘ └────────────────┘ └────────────────┘
 
 
 1. **Node Exporter**: Collects metrics from the host system and exposes them on port `9100`.  
