@@ -31,10 +31,11 @@ I installed Prometheus and Grafana via Homebrew:
 brew install prometheus grafana
 This ensures the required software components are available on the system.
 
-2. Downloaded and Ran Node Exporter
+---
+
+#### 2. Download and Run Node Exporter
 
 Downloaded the appropriate Node Exporter version for the system architecture (Intel amd64 or Apple Silicon arm64) from the Node Exporter releases
-
 
 Extract and run Node Exporter:
 tar -xzf node_exporter-1.9.1.darwin-amd64.tar.gz
