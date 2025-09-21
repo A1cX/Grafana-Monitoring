@@ -1,17 +1,113 @@
+
 # Grafana-Monitoring
 
-This repository contains a basic Grafana and Prometheus monitoring setup for personal use.
+This repository provides a basic system monitoring setup for macOS using **Node Exporter**, **Prometheus**, and **Grafana**.  
+The setup enables the collection, storage, and visualization of system metrics including CPU, memory, disk, and network usage.
 
-## Files
+---
+## System Architecture
+The monitoring setup follows a three-tier architecture:
 
-- `node_exporter_dashboard.json` – Exported Grafana dashboard for Node Exporter metrics.
-- `prometheus.yml` – Prometheus configuration file for local scraping.
++-----------------+ +----------------+ +----------------+
+| | | | | |
+| Node Exporter +----->+ Prometheus +----->+ Grafana |
+| (metrics) | | (stores data) | | (visualizes) |
+| | | | | |
++-----------------+ +----------------+ +----------------+
+
+
+┌─────────────────┐ ┌────────────────┐ ┌────────────────┐
+│ │ │ │ │ │
+│ Node Exporter │ │ Prometheus │ │ Grafana │
+│ (metrics) │ │ (scrapes & │ │ (visualizes) │
+│ │ │ stores data) │ │ │
+└─────────────────┘ └────────────────┘ └────────────────┘
+
+
+1. **Node Exporter**: Collects metrics from the host system and exposes them on port `9100`.  
+2. **Prometheus**: Scrapes the metrics from Node Exporter at regular intervals and stores them.  
+3. **Grafana**: Connects to Prometheus to display metrics using dashboards.
+
+---
+
+## Repository Contents
+
+- `node_exporter_dashboard.json` – Preconfigured Grafana dashboard for Node Exporter metrics.  
+- `prometheus.yml` – Prometheus configuration file specifying the scrape targets and intervals.
+
+---
 
 ## Setup Instructions
 
-1. **Install Prometheus** and Grafana on your machine.
-2. **Move the files** into a project folder, e.g., `Grafana-Monitoring`.
-3. **Start Prometheus**:
-   ```bash
-   prometheus --config.file=prometheus.yml
+### 1. Install Dependencies
 
+Install Prometheus and Grafana via Homebrew:
+
+```bash
+brew install prometheus grafana
+This ensures the required software components are available on the system.
+
+2. Download and Run Node Exporter
+
+Download the appropriate Node Exporter version for the system architecture (Intel amd64 or Apple Silicon arm64) from the Node Exporter releases
+.
+
+Extract and run Node Exporter:
+tar -xzf node_exporter-1.9.1.darwin-amd64.tar.gz
+cd node_exporter-1.9.1.darwin-amd64
+./node_exporter
+
+Verify that Node Exporter is running:
+curl http://localhost:9100/metrics | head -n 10
+
+3. Configure and Start Prometheus
+
+Place the provided prometheus.yml in the project directory and start Prometheus:
+prometheus --config.file=prometheus.yml
+Access Prometheus via: http://localhost:9090
+
+Prometheus scrapes metrics from Node Exporter according to the configuration.
+4. Start Grafana
+brew services start grafana
+Access Grafana via: http://localhost:3000
+
+Default credentials: admin/admin
+5. Import the Dashboard
+
+Navigate to Dashboards → Import in Grafana.
+
+Upload node_exporter_dashboard.json.
+
+Set the Data Source to the Prometheus instance.
+
+Apply changes to visualize system metrics.
+
+Note: If the dashboard initially shows no data, allow a few moments for Prometheus to scrape metrics.
+
+6. Verification
+
+Node Exporter metrics endpoint: http://localhost:9100/metrics
+
+Prometheus scrape targets: http://localhost:9090/targets
+
+Grafana dashboard displays metrics from Prometheus after data is collected.
+
+7. Optional: Version Control
+
+To track the project with Git:
+git init
+git add .
+git commit -m "Initial Grafana monitoring setup"
+git remote add origin https://github.com/YourUsername/Grafana-Monitoring.git
+git branch -M main
+git push -u origin main
+
+Notes
+
+Ensure the Node Exporter version matches the macOS architecture.
+
+Dashboards may include variables (job, node, instance). Ensure correct selection for metrics display.
+
+Prometheus must successfully scrape Node Exporter for Grafana to display data.
+
+This setup provides a functional monitoring stack that allows visualization of system metrics in a Grafana dashboard on macOS.
