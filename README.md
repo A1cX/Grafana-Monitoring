@@ -36,17 +36,17 @@ This ensures the required software components are available on the system.
 Downloaded the appropriate Node Exporter version for the system architecture (Intel amd64 or Apple Silicon arm64) from the Node Exporter releases
 
 
-+ Extract and run Node Exporter:
+Extract and run Node Exporter:
 tar -xzf node_exporter-1.9.1.darwin-amd64.tar.gz
 cd node_exporter-1.9.1.darwin-amd64
 ./node_exporter
 
-+ Verified that Node Exporter is running:
+Verified that Node Exporter is running:
 curl http://localhost:9100/metrics | head -n 10
 
-3. Configure and Start Prometheus
+3. Configured and Started Prometheus
 
-Place the provided prometheus.yml in the project directory and start Prometheus:
+Placed the provided prometheus.yml in the project directory and started Prometheus:
 prometheus --config.file=prometheus.yml
 Access Prometheus via: http://localhost:9090
 
@@ -56,15 +56,16 @@ brew services start grafana
 Access Grafana via: http://localhost:3000
 
 Default credentials: admin/admin
-5. Import the Dashboard
 
-Navigate to Dashboards → Import in Grafana.
+5. Imported the Dashboard
 
-Upload node_exporter_dashboard.json.
+Navigated to Dashboards → Import in Grafana.
+
+Uploaded node_exporter_dashboard.json.
 
 Set the Data Source to the Prometheus instance.
 
-Apply changes to visualize system metrics.
+Applie changes to visualize system metrics.
 
 Note: If the dashboard initially shows no data, allow a few moments for Prometheus to scrape metrics.
 
@@ -76,9 +77,10 @@ Prometheus scrape targets: http://localhost:9090/targets
 
 Grafana dashboard displays metrics from Prometheus after data is collected.
 
-7. Optional: Version Control
+7. Version Control
 
-To track the project with Git:
+To track the project with Git i used:
+
 git init
 git add .
 git commit -m "Initial Grafana monitoring setup"
@@ -88,10 +90,11 @@ git push -u origin main
 
 Notes
 
-Ensure the Node Exporter version matches the macOS architecture.
+Ensured the Node Exporter version matches the macOS architecture.
 
-Dashboards may include variables (job, node, instance). Ensure correct selection for metrics display.
+Dashboards included variables (job, node, instance) that needed manual correction/selection for metrics display.
 
-Prometheus must successfully scrape Node Exporter for Grafana to display data.
+Prometheus must successfully scrape Node Exporter for Grafana to display data and manauak checks and restart of Grafana was needed.
 
-This setup provides a functional monitoring stack that allows visualization of system metrics in a Grafana dashboard on macOS.
+This personal setup provides a functional monitoring stack that allows visualization of system metrics in a Grafana dashboard on macOS.
+
