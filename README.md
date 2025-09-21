@@ -8,28 +8,6 @@ The setup enables the collection, storage, and visualization of system metrics i
 ## System Architecture
 The monitoring setup follows a three-tier architecture:
 
-+---------------+
-| Node Exporter |
-| (collects     |
-| metrics)      |
-+---------------+
-        |
-        v
-+---------------+
-| Prometheus    |
-| (scrapes &    |
-| stores data)  |
-+---------------+
-        |
-        v
-+---------------+
-| Grafana       |
-| (visualizes   |
-| metrics)      |
-+---------------+
-
-
-
 1. **Node Exporter**: Collects metrics from the host system and exposes them on port `9100`.  
 2. **Prometheus**: Scrapes the metrics from Node Exporter at regular intervals and stores them.  
 3. **Grafana**: Connects to Prometheus to display metrics using dashboards.
@@ -47,23 +25,23 @@ The monitoring setup follows a three-tier architecture:
 
 ### 1. Install Dependencies
 
-Install Prometheus and Grafana via Homebrew:
+I installed Prometheus and Grafana via Homebrew:
 
 ```bash
 brew install prometheus grafana
 This ensures the required software components are available on the system.
 
-2. Download and Run Node Exporter
+2. Downloaded and Ran Node Exporter
 
-Download the appropriate Node Exporter version for the system architecture (Intel amd64 or Apple Silicon arm64) from the Node Exporter releases
-.
+Downloaded the appropriate Node Exporter version for the system architecture (Intel amd64 or Apple Silicon arm64) from the Node Exporter releases
 
-Extract and run Node Exporter:
+
++ Extract and run Node Exporter:
 tar -xzf node_exporter-1.9.1.darwin-amd64.tar.gz
 cd node_exporter-1.9.1.darwin-amd64
 ./node_exporter
 
-Verify that Node Exporter is running:
++ Verified that Node Exporter is running:
 curl http://localhost:9100/metrics | head -n 10
 
 3. Configure and Start Prometheus
