@@ -35,7 +35,7 @@ This ensures the required software components are available on the system.
 
 2. Downloaded and Run Node Exporter
 
-Downloaded the appropriate Node Exporter version for the system architecture (Intel amd64 or Apple Silicon arm64) from the Node Exporter releases
+Downloaded the appropriate Node Exporter version for the system architecture (Apple Silicon arm64) from the Node Exporter releases
 
 Extract and run Node Exporter:
 tar -xzf node_exporter-1.9.1.darwin-amd64.tar.gz
@@ -66,9 +66,10 @@ Uploaded node_exporter_dashboard.json.
 
 Set the Data Source to the Prometheus instance.
 
-Applie changes to visualize system metrics.
+Applied changes to visualize system metrics.
 
-Note: If the dashboard initially shows no data, allow a few moments for Prometheus to scrape metrics.
+Note: the dashboard initially showed no data, even after restart to allow Prometheus to scrape metrics.
+Manually correcetd the .json file to match the configuration of my Dashboard and linked them, restarted Prometehus and it worked.
 
 6. Verification
 
@@ -95,7 +96,8 @@ Ensured the Node Exporter version matches the macOS architecture.
 
 Dashboards included variables (job, node, instance) that needed manual correction/selection for metrics display.
 
-Prometheus must successfully scrape Node Exporter in order for Grafana to display data and manauak checks and restart of Grafana was needed.
+Prometheus must successfully scrape Node Exporter in order for Grafana to display data and manaual checks and restart was needed.
 
 This personal setup provides a functional monitoring stack that allows visualization of system metrics in a Grafana dashboard on macOS.
+More metrics to be added soon, probably also visualisation.
 
